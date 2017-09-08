@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .video-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .info {
+            font-size:.95em;
+            padding-top: 1px;
+            margin-bottom: 1px;
+        }
+        .storyline {
+            font-size:.85em;
+            margin-top:9px;
+        }
+        .video-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.video-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the videos when the page loads
+        $(document).ready(function () {
+          $('.video-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="0vxOhd4qlnA" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" width="220" height="342">
+    <h2>Interstellar</h2>
+    <p class="storyline">In Earth's future, a global crop blight and second Dust Bowl are slowly rendering the planet uninhabitable. Professor Brand (Michael Caine), a brilliant NASA physicist, is working on plans to save mankind by transporting Earth's population to a new home via a wormhole. But first, Brand must send former NASA pilot Cooper (Matthew McConaughey) and a team of researchers through the wormhole and across the galaxy to find out which of three planets could be mankind's new home.</p>
+    <p class="info"><b>Rating: 8.6/10</b></p>
+    <p class="info"><b>Duration: 2h 48m</b></p>
+    <p class="info"><b>Release Year: 2014</b></p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="YoHD9XEInc0" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg" width="220" height="342">
+    <h2>Inception</h2>
+    <p class="storyline">Dom Cobb (Leonardo DiCaprio) is a thief with the rare ability to enter people's dreams and steal their secrets from their subconscious. His skill has made him a hot commodity in the world of corporate espionage but has also cost him everything he loves. Cobb gets a chance at redemption when he is offered a seemingly impossible task: Plant an idea in someone's mind. If he succeeds, it will be the perfect crime, but a dangerous enemy anticipates Cobb's every move.</p>
+    <p class="info"><b>Rating: 8.8/10</b></p>
+    <p class="info"><b>Duration: 2h 48m</b></p>
+    <p class="info"><b>Release Year: 2010</b></p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="SUXWAEX2jlg" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg" width="220" height="342">
+    <h2>Fight Club</h2>
+    <p class="storyline">A depressed man (Edward Norton) suffering from insomnia meets a strange soap salesman named Tyler Durden (Brad Pitt) and soon finds himself living in his squalid house after his perfect apartment is destroyed. The two bored men form an underground club with strict rules and fight other men who are fed up with their mundane lives. Their perfect partnership frays when Marla (Helena Bonham Carter), a fellow support group crasher, attracts Tyler's attention.</p>
+    <p class="info"><b>Rating: 8.8/10</b></p>
+    <p class="info"><b>Duration: 2h 31m</b></p>
+    <p class="info"><b>Release Year: 1999</b></p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="ByXuk9QqQkk" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG" width="220" height="342">
+    <h2>Spirited Away</h2>
+    <p class="storyline">In this animated feature by noted Japanese director Hayao Miyazaki, 10-year-old Chihiro (Rumi Hiiragi) and her parents (Takashi Naito, Yasuko Sawaguchi) stumble upon a seemingly abandoned amusement park. After her mother and father are turned into giant pigs, Chihiro meets the mysterious Haku (Miyu Irino), who explains that the park is a resort for supernatural beings who need a break from their time spent in the earthly realm, and that she must work there to free herself and her parents.</p>
+    <p class="info"><b>Rating: 8.6/10</b></p>
+    <p class="info"><b>Duration: 2h 20m</b></p>
+    <p class="info"><b>Release Year: 2001</b></p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="5iaYLCiq5RM" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/7/76/Shutterislandposter.jpg" width="220" height="342">
+    <h2>Shutter Island</h2>
+    <p class="storyline">The implausible escape of a brilliant murderess brings U.S. Marshal Teddy Daniels (Leonardo DiCaprio) and his new partner (Mark Ruffalo) to Ashecliffe Hospital, a fortress-like insane asylum located on a remote, windswept island. The woman appears to have vanished from a locked room, and there are hints of terrible deeds committed within the hospital walls. As the investigation deepens, Teddy realizes he will have to confront his own dark fears if he hopes to make it off the island alive.</p>
+    <p class="info"><b>Rating: 8.1/10</b></p>
+    <p class="info"><b>Duration: 2h 18m</b></p>
+    <p class="info"><b>Release Year: 2010</b></p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="-5xdTlgaaaw" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Game_of_Thrones_Season_7.jpg" width="220" height="342">
+    <h2>Game of Thrones</h2>
+    <p class="storyline">George R.R. Martin's best-selling book series "A Song of Ice and Fire" is brought to the screen as HBO sinks its considerable storytelling teeth into the medieval fantasy epic. It's the depiction of two powerful families -- kings and queens, knights and renegades, liars and honest men -- playing a deadly game for control of the Seven Kingdoms of Westeros, and to sit atop the Iron Throne.</p>
+    <p class="info"><b>Rating: 9.5/10</b></p>
+    <p class="info"><b>TV Station: HBO</b></p>
+    <p class="info"><b>Season: 7</b></p>
+    <p class="info">Episodes: 0 Dragonstone, 1 Stormborn, 2 Queen of Justice, 3 The Spoils of War, 4 Eastwatch, 5 Beyond the Wall, 6 The Dragon and the Wolf, </p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="PAm8PV47jMM" data-toggle="modal" data-target="#trailer">
+    <img src="http://www.gstatic.com/tv/thumb/tvbanners/12912842/p12912842_b_v8_aa.jpg" width="220" height="342">
+    <h2>The Big Bang Theory</h2>
+    <p class="storyline">Mensa-fied best friends and roommates Leonard and Sheldon, physicists who work at the California Institute of Technology, may be able to tell everybody more than they want to know about quantum physics, but getting through most basic social situations, especially ones involving women, totally baffles them. How lucky, then, that babe-alicious waitress/aspiring actress Penny moves in next door. Frequently seen hanging out with Leonard and Sheldon are friends and fellow Caltech scientists Wolowitz and Koothrappali. Will worlds collide? Does Einstein theorize in the woods?</p>
+    <p class="info"><b>Rating: 8.3/10</b></p>
+    <p class="info"><b>TV Station: CBS</b></p>
+    <p class="info"><b>Season: 1</b></p>
+    <p class="info">Episodes: 0 Pilot, 1 The Big Bran Hypothesis, 2 The Fuzzy Boots Corollary, 3 The Luminous Fish Effect, 4 The Hamburger Postulate, 5 The Middle-Earth Paradigm, 6 The Dumpling Paradox, 7 The Grasshopper Experiment, 8 The Cooper-Hofstadter Polarization, 9 The Loobenfeld Decay, 10 The Pancake Batter Anomaly, 11 The Jerusalem Duality, 12 The Bat Jar Conjecture, 13 The Nerdvana Annihilation, 14 The Shiksa Indeterminacy, 15 The Peanut Reaction, 16 The Tangerine Factor, </p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="Yp0kth7-zsM" data-toggle="modal" data-target="#trailer">
+    <img src="http://www.gstatic.com/tv/thumb/tvbanners/183931/p183931_b_v8_ac.jpg" width="220" height="342">
+    <h2>Friends</h2>
+    <p class="storyline">Three young men and three young women - of the BFF kind - live in the same apartment complex and face life and love in New York. They're not above sticking their noses into one another's businesses and swapping romantic partners, which always leads to the kind of hilarity average people will never experience - especially during breakups.</p>
+    <p class="info"><b>Rating: 8.9/10</b></p>
+    <p class="info"><b>TV Station: NBC</b></p>
+    <p class="info"><b>Season: 10</b></p>
+    <p class="info">Episodes: 0 The One After Joey and Rachel Kiss, 1 The One Where Ross is Fine, 2 The One with Ross's Tan, 3 The One with the Cake, 4 The One Where Rachel's Sister Babysits, 5 The One with Ross's Grant, 6 The One with the Home Study, 7 The One with the Late Thanksgiving, 8 The One with the Birth Mother, 9 The One Where Chandler Gets Caught, 10 The One Where the Stripper Cries, 11 The One with Phoebe's Wedding, 12 The One Where Joey Speaks French, 13 The One with Princess Consuela, 14 The One Where Estelle Dies, 15 The One with Rachel's Going Away Party, 16 The Last One, </p>
+</div>
+
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="xvszmNXdM4w" data-toggle="modal" data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg" width="220" height="342">
+    <h2>3 Idiots</h2>
+    <p class="storyline">Two friends looking for a lost buddy deal with a forgotten bet, a wedding they are forced to crash and an out of control funeral.</p>
+    <p class="info"><b>Rating: 8.4/10</b></p>
+    <p class="info"><b>Duration: 2h 51m</b></p>
+    <p class="info"><b>Release Year: 2009</b></p>
+</div>
+
+    </div>
+  </body>
+</html>
