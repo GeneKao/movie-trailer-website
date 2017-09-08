@@ -35,11 +35,20 @@ main_page_head = '''
             width: 100%;
             height: 100%;
         }
-        .movie-tile {
+        .video-tile {
             margin-bottom: 20px;
             padding-top: 20px;
         }
-        .movie-tile:hover {
+        .info {
+            font-size:.95em;
+            padding-top: 1px;
+            margin-bottom: 1px;
+        }
+        .storyline {
+            font-size:.85em;
+            margin-top:9px;
+        }
+        .video-tile:hover {
             background-color: #EEE;
             cursor: pointer;
         }
@@ -65,7 +74,7 @@ main_page_head = '''
             $("#trailer-video-container").empty();
         });
         // Start playing the video whenever the trailer modal is opened
-        $(document).on('click', '.movie-tile', function (event) {
+        $(document).on('click', '.video-tile', function (event) {
             var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
             var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
             $("#trailer-video-container").empty().append($("<iframe></iframe>", {
@@ -75,9 +84,9 @@ main_page_head = '''
               'frameborder': 0
             }));
         });
-        // Animate in the movies when the page loads
+        // Animate in the videos when the page loads
         $(document).ready(function () {
-          $('.movie-tile').hide().first().show("fast", function showNext() {
+          $('.video-tile').hide().first().show("fast", function showNext() {
             $(this).next("div").show("fast", showNext);
           });
         });
@@ -113,50 +122,87 @@ main_page_content = '''
       </div>
     </div>
     <div class="container">
-      {movie_tiles}
+      {video_tiles}
     </div>
   </body>
 </html>
 '''
 
 
-# A single movie entry html template
+# A single video entry html template
+# movie content
 movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
+    <h2>{video_title}</h2>
+    <p class="storyline">{storyline}</p>
+    <p class="info"><b>Rating: {rating}/10</b></p>
+    <p class="info"><b>Duration: {duration}</b></p>
+    <p class="info"><b>Release Year: {year}</b></p>
+</div>
+'''
+# tv show content
+tv_tile_content = '''
+<div class="col-md-6 col-lg-4 video-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+    <img src="{poster_image_url}" width="220" height="342">
+    <h2>{video_title}</h2>
+    <p class="storyline">{storyline}</p>
+    <p class="info"><b>Rating: {rating}/10</b></p>
+    <p class="info"><b>TV Station: {tv_station}</b></p>
+    <p class="info"><b>Season: {season}</b></p>
+    <p class="info">Episodes: {episodes}</p>
 </div>
 '''
 
 
-def create_movie_tiles_content(movies):
+def create_video_tiles_content(videos):
     # The HTML content for this section of the page
     content = ''
-    for movie in movies:
+    for video in videos:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
+            r'(?<=v=)[^&#]+', video.trailer_youtube_url)
         youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
+            r'(?<=be/)[^&#]+', video.trailer_youtube_url)
         trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
                               else None)
 
-        # Append the tile for the movie with its content filled in
+        # Append the tile for the video with its content filled in
         content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
+                # attributes for videos
+                video_title=video.title,
+
+                # added more information here
+                storyline=video.storyline,
+                rating=video.rating,
+                duration=video.duration,
+                year=video.year,
+
+                poster_image_url=video.poster_image_url,
+                trailer_youtube_id=trailer_youtube_id
+        ) if video.video_type == "movie" else tv_tile_content.format(
+                # here is the tv shows attributes
+                video_title=video.title,
+                storyline=video.storyline,
+                rating=video.rating,
+                tv_station=video.tv_station,
+                season=video.season,
+                episodes=video.get_episodes(),
+
+                poster_image_url=video.poster_image_url,
+                trailer_youtube_id=trailer_youtube_id
         )
+                
     return content
 
 
-def open_movies_page(movies):
+def open_videos_page(videos):
     # Create or overwrite the output file
     output_file = open('fresh_tomatoes.html', 'w')
 
-    # Replace the movie tiles placeholder generated content
+    # Replace the video tiles placeholder generated content
     rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
+        video_tiles=create_video_tiles_content(videos))
 
     # Output the file
     output_file.write(main_page_head + rendered_content)
