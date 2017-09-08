@@ -192,7 +192,7 @@ def create_video_tiles_content(videos):
                 poster_image_url=video.poster_image_url,
                 trailer_youtube_id=trailer_youtube_id
         )
-                
+
     return content
 
 
