@@ -156,6 +156,7 @@ tv_tile_content = '''
 
 
 def create_video_tiles_content(videos):
+    """Create video and insert to tile content."""
     # The HTML content for this section of the page
     content = ''
     for video in videos:
@@ -197,6 +198,7 @@ def create_video_tiles_content(videos):
 
 
 def open_videos_page(videos):
+    """Open video page."""
     # Create or overwrite the output file
     output_file = open('fresh_tomatoes.html', 'w')
 
