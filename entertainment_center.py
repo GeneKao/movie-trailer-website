@@ -70,7 +70,7 @@ spirited_away = media.Movie(
     "supernatural beings who need a break from their "
     "time spent in the earthly realm, and that she must "
     "work there to free herself and her parents.",
-    "https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG",
+    "https://upload.wikimedia.org/wikipedia/en/d/db/Spirited_Away_Japanese_poster.png",
     "https://youtu.be/ByXuk9QqQkk",
     "2001",
     "2h 20m")
@@ -150,7 +150,7 @@ game_of_thrones = media.TvShow(
     "and renegades, liars and honest men -- playing a "
     "deadly game for control of the Seven Kingdoms of "
     "Westeros, and to sit atop the Iron Throne.",
-    "https://upload.wikimedia.org/wikipedia/en/0/04/Game_of_Thrones_Season_7.jpg",  # NOQA
+    "https://upload.wikimedia.org/wikipedia/en/9/92/Game_of_Thrones_Season_7.png",  # NOQA
     "https://youtu.be/-5xdTlgaaaw",
     "7",
     "HBO")
